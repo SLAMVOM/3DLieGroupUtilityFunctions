@@ -21,10 +21,12 @@ https://doi.org/10.48550/arXiv.1812.01537)
 
 The only dependency requried is the [Eigen 3](https://eigen.tuxfamily.org/index.php?title=Main_Page) package, which a commonly used Linear Algebra pacakge in C++.
 
-Some notes regarding the usage of the file, please refer to [3D_Utilities_Note.pdf](3D_Utilities_Note.pdf) in this repository.
+<br>
+<br>
 
-<br>
-<br>
+Some notes regarding the usage of the file, please refer to [3D_Utilities_Note.pdf](https://github.com/SLAMVOM/3DLieGroupUtilityFunctions/blob/code_dev/3D_Utilities_Notes.pdf) in this repository.
+
+
 <br>
 <br>
 
