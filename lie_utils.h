@@ -1,5 +1,5 @@
-/* This header file contains the utilities functions that are used
-** in The Sphere Problem exercise. The utilities mainly include
+/* This header file contains the utilities functions and identities
+** for the 3D Lie Group. The utilities mainly include
 ** identities and operations of SO(3) and SE(3) vector and matrices.
 **
 **
@@ -337,11 +337,11 @@ void eigenRotationMatrixToUnitQuaternion(const Eigen::Matrix3d &R_mat, Vector4d 
 // Not using a MatrixAdapter to accept matrix input
 // To use MatrixAdapter to accept matrix input, see:
 // https://github.com/ceres-solver/ceres-solver/blob/master/include/ceres/rotation.h
-// Here uses a 1D array with 14 elements to store the output hat matrix of zeta
+// Here uses a 1D array with 16 elements to store the output hat matrix of zeta
 template<typename T>
 inline void zetaHat(const T zeta_vec[6], T zeta_hat[16]) {
     // Note the input zeta_vec vector should have a format of:
-    // [tx, ty, tz, r1, r2, r3], that is the translation part should be the first in the front
+    // [r1, r2, r3, p1, p2, p3], that is the translation-related part should be the first in the front
     // angle-axis rotation vector comes in the back
     // The output matrix will be stored in a 1D array with 16 elements in ROW MAJOR order.
     // Again, the output is in ROW MAJOR order.
