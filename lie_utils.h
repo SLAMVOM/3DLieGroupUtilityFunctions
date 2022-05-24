@@ -5,7 +5,7 @@
 **
 ** Author: MT
 ** Creation Date: 2022-May-05
-** Previous Edit: 2022-May-08
+** Previous Edit: 2022-May-23
 */
 
 
@@ -235,7 +235,7 @@ void phiToSO3(const Eigen::Vector3d &phi_vec, Eigen::Matrix3d &R_mat) {
 // computing a 3 x 1 tangent vector, phi (i.e., an angle-axis representation), from a rotation
 void lnVeeToPhi(const Eigen::Matrix3d &R_mat, Eigen::Vector3d &phi) {
     // The input to the function should be a 3x3 Eigen matrix with double precision values.
-    // The output is the corresponding 3x1 tangential lie algebra vector, phi.
+    // The output is the corresponding 3x1 tangential vector, phi.
 
     // The workflow follow the "rotation.h" file used by Google's Ceres solver: Rot_mat -> unit_quaternion -> angle_axis
     // the rotation matrix will be first raveled into an 1-D array, 
@@ -376,7 +376,7 @@ void expZetaHat(const Matrix4d &zeta_hat_mat, Matrix4d &T_mat) {
 } // end of expZetaHat
 
 
-// the zetaToSE3() function first converts the lie algebra tangent vector, zeta to the zeta hat matrix,
+// the zetaToSE3() function first converts the tangent vector, zeta to the zeta hat matrix,
 // then perform the exponential map over the zeta_hat matrix to obtain an transformation matrix
 void zetaToSE3(const Vector6d &zeta_vec, Matrix4d &T_mat) {
     // Note the input zeta_vec vector should have a format of:
@@ -393,7 +393,7 @@ void zetaToSE3(const Vector6d &zeta_vec, Matrix4d &T_mat) {
 // computing a 6 x 1 tangent vector, zeta, from a transformation
 void lnVeeToZeta(const Matrix4d &T_mat, Vector6d &zeta) {
     // The input to the function should be a 4x4 Eigen matrix with double precision values.
-    // The output is the corresponding 6x1 lie algebra vector, zeta.
+    // The output is the corresponding 6x1 tangential vector, zeta.
 
     // 1. extract the rotation matrix and rho vector from the input transformation matrix
     Eigen::Matrix3d R_mat = T_mat.block<3, 3>(0, 0);
@@ -493,9 +493,9 @@ void invAdjointSE3(const Matrix4d &T_mat, Matrix6d &inv_Adj_T_mat) {
 } // end of invAdjointSE3
 
 
-// the leftJacobianSE3() function computes the left Jacobian w.r.t. a SE(3) lie algebra vector, zeta.
+// the leftJacobianSE3() function computes the left Jacobian w.r.t. a SE(3) tangential vector, zeta.
 void leftJacobianSE3(const Vector6d &zeta_vec, Matrix6d &left_Jac_mat) {
-    // The input to the function should be a 6D vector of the lie algebra tangent vector with double precision values
+    // The input to the function should be a 6D vector of the tangent vector with double precision values
     // The output matrix will be the corresponding Jacobian of the tangent vector in a 6x6 matrix with double precisions
     // Extract the rotation vector, phi_vec
     Eigen::Vector3d phi_vec(zeta_vec[3], zeta_vec[4], zeta_vec[5]); // rotation vector is behind the rho vector, [3 x 1]
@@ -534,9 +534,9 @@ void leftJacobianSE3(const Vector6d &zeta_vec, Matrix6d &left_Jac_mat) {
 } // end of leftJacobianSE3()
 
 
-// the invLeftJacobianSE3() function computes the inversion of left Jacobian w.r.t. a SE(3) lie algebra vector, zeta.
+// the invLeftJacobianSE3() function computes the inversion of left Jacobian w.r.t. a SE(3) tangential vector, zeta.
 void invLeftJacobianSE3(const Vector6d &zeta_vec, Matrix6d &inv_Jac_mat) {
-    // The input to the function should be a 6D vector of the lie algebra tangent vector with double precision values
+    // The input to the function should be a 6D vector of the tangent vector with double precision values
     // The output matrix will be the corresponding inversion of Jacobian of the tangent vector in a 6x6 matrix
     // Extract the rotation vector, phi_vec
     Eigen::Vector3d phi_vec(zeta_vec[3], zeta_vec[4], zeta_vec[5]); // rotation vector is behind the rho vector, [3 x 1]
